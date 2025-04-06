@@ -13,7 +13,7 @@ app.secret_key = os.urandom(24)  # Secret key for session management
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="PiSHALAM2002",  # <-- Replace with your MySQL password
+    password="password",  # <-- Replace with your MySQL password
     database="users"
 )
 cursor = db.cursor()
