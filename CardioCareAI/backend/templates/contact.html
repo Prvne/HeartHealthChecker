@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us - CardioCareAI</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color:rgba(227, 227, 227, 0.87);
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: rgb(113, 9, 9);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ffe3e3;
+            transform: scale(1.05);
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .content h1 {
+            color: #DC143C;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content p.subtext {
+            text-align: center;
+            color: #555;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-size: 1.1rem;
+            color: #333;
+            padding: 0 20px;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info div span {
+            font-weight: bold;
+            color: #DC143C;
+        }
+
+        .form-placeholder {
+            margin-top: 40px;
+            text-align: center;
+            color: #777;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        footer {
+            background-color: rgb(113, 9, 9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+        }
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        body.loaded {
+            opacity: 1;
+        }
+        
+        .page-transition {
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .page-transition.fade-out {
+            opacity: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="/home">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/faq">FAQ</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/professionals">Professionals</a>
+        </div>
+        <div>Signed in as <strong>{{ username }}</strong></div>
+    </div>
+
+    <div class="content">
+        <h1>Contact Us</h1>
+        <p class="subtext">
+            We're here to help you with any questions or feedback. Whether you're a user or a healthcare provider, don't hesitate to reach out!
+        </p>
+
+        <div class="contact-info">
+            <div><span>Email:</span> cardiocareai@gmail.com</div>
+            <div><span>Phone:</span> +91 90375 44180</div>
+            <div><span>Address:</span> 123 Street Street, Aluva, Ernakulam</div>
+        </div>
+
+        <div class="form-placeholder">
+            [Contact form coming soon — stay tuned!]
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CardioCareAI. All rights reserved.</p>
+    </footer>
+    <script>
+        // Fade in on load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+        });
+    
+        // Fade out on navigation links
+        document.querySelectorAll('a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith("/") && !href.startsWith("#") && !link.hasAttribute("download")) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.body.classList.remove('loaded');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 500); // Match this with your CSS transition time
+                });
+            }
+        });
+    </script>
+    
+</body>
+</html>

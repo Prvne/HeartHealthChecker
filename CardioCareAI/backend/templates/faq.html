@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ - CardioCareAI</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(227, 227, 227, 0.87);
+            margin: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .navbar {
+            background-color: rgb(113, 9, 9);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ffe3e3;
+            transform: scale(1.05);
+        }
+
+        .content {
+            padding: 60px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .content h1 {
+            color: #DC143C;
+            margin-bottom: 30px;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .faq-item h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .faq-item p {
+            margin: 0;
+            color: #555;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgb(113, 9, 9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="/home">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/Faq">FAQ</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/professionals">Professionals</a>
+        </div>
+        <div>Signed in as <strong>{{ username }}</strong></div>
+    </div>
+
+    <div class="content">
+        <h1>Frequently Asked Questions</h1>
+
+        <div class="faq-item">
+            <h3>Is CardioCareAI a replacement for a doctor?</h3>
+            <p>No. Our tool provides risk predictions but should not be considered a substitute for medical consultation. Always consult a healthcare professional for proper diagnosis.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How accurate is the heart health prediction?</h3>
+            <p>Our model has been trained on validated datasets and performs with high accuracy. However, no AI can guarantee 100% accuracy due to the variability of human health.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Is my data secure?</h3>
+            <p>Yes. We prioritize user privacy and follow best practices to ensure that all submitted data is handled securely and confidentially.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I use this platform without a medical background?</h3>
+            <p>Absolutely! CardioCareAI is designed to be user-friendly for both medical professionals and the general public.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CardioCareAI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+        });
+
+        document.querySelectorAll('a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith("/") && !href.startsWith("#") && !link.hasAttribute("download")) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.body.classList.remove('loaded');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 500);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

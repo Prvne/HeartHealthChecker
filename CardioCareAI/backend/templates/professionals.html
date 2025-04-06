@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For Professionals - CardioCareAI</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(227, 227, 227, 0.87);
+            margin: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .navbar {
+            background-color: rgb(113, 9, 9);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ffe3e3;
+            transform: scale(1.05);
+        }
+
+        .content {
+            padding: 60px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .content h1 {
+            color: #DC143C;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .highlight {
+            color: #DC143C;
+            font-weight: bold;
+        }
+
+        a.button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(113, 9, 9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .testimonials {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+        }
+
+        .testimonial-card.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .testimonial-card .author {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #DC143C;
+        }
+
+        .carousel-controls {
+            margin-top: 15px;
+        }
+
+        .carousel-controls button {
+            background-color: rgb(113, 9, 9);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-controls button:hover {
+            background-color: #a01414;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgb(113, 9, 9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="/home">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/faq">FAQ</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/professionals">Professionals</a>
+        </div>
+        <div>Signed in as <strong>{{ username }}</strong></div>
+    </div>
+
+    <div class="content">
+        <h1>For Professionals</h1>
+
+        <div class="card">
+            <h2>⚠️ A Note on Accuracy & Medical Guidance</h2>
+            <p>
+                At <span class="highlight">CardioCareAI</span>, our AI models aim to assist in the early detection of heart disease risks. While our platform is powered by data-driven insights, it’s crucial to understand that:
+            </p>
+            <p class="highlight">Our system is not a substitute for a professional medical diagnosis.</p>
+            <p>
+                Heart conditions are complex and often influenced by unique factors that artificial intelligence alone cannot always capture. Predictions should be treated as preliminary suggestions, not conclusive evaluations.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>👩‍⚕️ Always Consult a Healthcare Professional</h2>
+            <p>
+                If a high-risk result is shown by our system or if you experience concerning symptoms, we urge you to consult a certified cardiologist or physician. Your health deserves personal, expert evaluation.
+            </p>
+            <p>To learn more or connect with certified doctors in India, visit the official medical council:</p>
+            <a class="button-link" href="https://www.nmc.org.in/" target="_blank">Visit National Medical Commission (NMC)</a>
+        </div>
+
+        <div class="testimonials">
+            <h2 style="color: #DC143C;">What Professionals Are Saying</h2>
+            <div class="carousel">
+                <div class="testimonial-card active">
+                    <p>“CardioCareAI is bridging the gap between data science and cardiovascular care in a way we’ve never seen before.”</p>
+                    <div class="author">— Dr. Neha Malhotra, Cardiologist</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>“This platform can serve as a reliable assistant to early screening, particularly in underserved regions.”</p>
+                    <div class="author">— Dr. Arjun Menon, Public Health Expert</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>“I appreciate how CardioCareAI emphasizes the importance of professional consultation while offering innovative support tools.”</p>
+                    <div class="author">— Dr. Rina Sharma, Family Physician</div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button onclick="changeTestimonial(-1)">Previous</button>
+                <button onclick="changeTestimonial(1)">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CardioCareAI. All rights reserved.</p>
+    </footer>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+        });
+
+        document.querySelectorAll('a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith("/") && !href.startsWith("#") && !link.hasAttribute("download")) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.body.classList.remove('loaded');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 500);
+                });
+            }
+        });
+
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+
+        function changeTestimonial(direction) {
+            testimonials[currentTestimonial].classList.remove('active');
+            currentTestimonial = (currentTestimonial + direction + testimonials.length) % testimonials.length;
+            testimonials[currentTestimonial].classList.add('active');
+        }
+    </script>
+</body>
+</html>

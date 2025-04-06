@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - CardioCareAI</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgba(227, 227, 227, 0.87);
+            margin: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .navbar {
+            background-color: rgb(113, 9, 9);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background-color: #7c0f0f;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ffe3e3;
+            transform: scale(1.05);
+        }
+
+        .content {
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .content h1,
+        .content p,
+        .founder-section {
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-in-out forwards;
+        }
+
+        .content h1 {
+            color: #DC143C;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            animation-delay: 0.2s;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+            animation-delay: 0.4s;
+        }
+
+        .founder-section {
+            text-align: center;
+            margin: 50px 0;
+            animation-delay: 0.6s;
+        }
+
+        .founder-section img {
+            max-width: 280px;
+            width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .founder-section img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .founder-section p {
+            margin-top: 20px;
+            font-size: 1.05rem;
+            color: #555;
+        }
+
+        .highlight {
+            color: #DC143C;
+            font-weight: bold;
+        }
+
+
+        footer {
+            background-color: rgb(113, 9, 9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+            animation: fadeInFooter 1s ease-in-out;
+        }
+
+        /* Animations */
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInFooter {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="/home">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/faq">FAQ</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/professionals">Professionals</a>
+        </div>
+        <div>Signed in as <strong>{{ username }}</strong></div>
+    </div>
+
+    <div class="content">
+        <h1>About Us</h1>
+        <p>
+            <span class="highlight">CardioCareAI</span> is an AI-driven platform committed to transforming preventive heart care. 
+            Our machine learning technology empowers users with early insights into heart disease risk — making heart health monitoring more accessible, personalized, and proactive.
+        </p>
+
+        <div class="founder-section">
+            <img src="{{ url_for('static', filename='images/founder.jpeg') }}" alt="Founder Photo">
+            <p>
+                <strong>Meet Our Founder:</strong><br>
+                Sana P Anwar is a visionary at the intersection of <span class="highlight">medicine</span> and <span class="highlight">artificial intelligence</span>. 
+                Her mission behind CardioCareAI is to democratize access to heart health insights and encourage a culture of early detection and care.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CardioCareAI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Page fade-in effect
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+        });
+
+        // Navbar scroll shadow
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Page fade-out on link navigation
+        document.querySelectorAll('a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith("/") && !href.startsWith("#") && !link.hasAttribute("download")) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.body.classList.remove('loaded');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CardioCareAI Sign Up</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg,rgb(192, 175, 175),rgb(214, 97, 97));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding: 20px;
+      background: rgb(113, 9, 9);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: left;
+      font-size: 24px;
+      font-weight: bold;
+      color:rgb(255, 255, 255);
+    }
+
+    .signup-container {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .signup-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border 0.3s, box-shadow 0.3s;
+      font-size: 16px;
+    }
+
+    input:focus {
+      border-color: #DC143C;
+      box-shadow: 0 0 5px rgba(220, 20, 60, 0.5);
+      outline: none;
+    }
+
+    .tooltip {
+      margin-top: 5px;
+      display: block;
+      font-size: 12px;
+      color: #555;
+      background: #ffeef2;
+      border-left: 4px solid #DC143C;
+      padding: 6px 10px;
+      border-radius: 6px;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .btn {
+      width: 100%;
+      background-color: rgb(113, 9, 9);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #c31135;
+      transform: translateY(-2px);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin: 10px 0 20px;
+      font-size: 14px;
+    }
+
+    .checkbox-group input {
+      margin-right: 8px;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: rgb(113, 9, 9);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-height: 600px) {
+      footer {
+        position: relative;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">CardioCareAI</div>
+
+  <div class="signup-container">
+    <h2>Sign Up for CardioCareAI</h2>
+    <form action="/signup" method="POST" onsubmit="return validateForm()">
+      <div class="input-group">
+        <input type="text" name="username" placeholder="Name" required />
+      </div>
+
+      <div class="input-group">
+        <input type="email" name="email" placeholder="Email" required />
+      </div>
+
+      <div class="input-group">
+        <input type="password" name="password" id="password" placeholder="Password" required />
+        <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+        <div class="tooltip">Min 6 characters, include letters & numbers</div>
+      </div>
+
+      <div class="input-group">
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required />
+        <span class="toggle-password" onclick="togglePassword('confirm_password')">👁️</span>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms" required />
+        <label for="terms">I agree to the <a href="#" style="color:#DC143C;">Terms & Conditions</a></label>
+      </div>
+
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 CardioCareAI</p>
+  </footer>
+
+  <script>
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    function validateForm() {
+      const pass = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm_password").value;
+
+      if (pass.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+      }
+
+      if (pass !== confirm) {
+        alert("Passwords do not match.");
+        return false;
+      }
+
+      if (!document.getElementById("terms").checked) {
+        alert("Please accept the Terms & Conditions.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+
+</body>
+</html>
